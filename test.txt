@@ -1,0 +1,1 @@
+this text is test script for checking connection
