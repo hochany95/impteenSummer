@@ -7,7 +7,7 @@
     android:background="?attr/fullscreenBackgroundColor"
     android:theme="@style/ThemeOverlay.EscapeRoomApp.FullscreenContainer"
     android:id="@+id/mainContainer"
-    tools:context=".InitFragment">
+    tools:context=".MissionFragment_001">
 
 
     <ImageView

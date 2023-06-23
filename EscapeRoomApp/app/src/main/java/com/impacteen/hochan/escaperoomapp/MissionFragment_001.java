@@ -12,9 +12,10 @@ import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.databinding.FragmentInitBinding;
 
-public class InitFragment extends Fragment {
+public class MissionFragment_001 extends Fragment {
 
     FragmentInitBinding binding;
+    public final int CURRENT_STAGE = 0;
 
     @Nullable
     @Override
@@ -30,6 +31,10 @@ public class InitFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+    }
+
+    public int getCurrentState() {
+        return this.CURRENT_STAGE;
     }
 
 

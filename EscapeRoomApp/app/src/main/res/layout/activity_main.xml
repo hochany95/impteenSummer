@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="Button" />
+            android:text="뒤로" />
 
         <Button
             android:id="@+id/button2"
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="Button" />
+            android:text="도움" />
 
         <Button
             android:id="@+id/button3"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="Button" />
+            android:text="다음" />
     </LinearLayout>
 
     <FrameLayout

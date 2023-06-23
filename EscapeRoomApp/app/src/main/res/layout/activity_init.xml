@@ -21,9 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
+        android:visibility="invisible"
         android:layout_marginBottom="44dp"
         android:layout_gravity="right|bottom"
-        android:text="Button" />
+        android:text="next" />
 
     <TextClock
         android:id="@+id/textClock"
