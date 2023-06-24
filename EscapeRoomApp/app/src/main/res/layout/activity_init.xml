@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/initTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:gravity="center|top"
         android:paddingTop="200dp"
-        android:background="@color/light_blue_600"
-        android:text="세상의 악한 세력이... 어쩌구 저쩌구"
+        android:background="@color/silver"
+        android:text="세상의 악한 세력이... \n어쩌구 저쩌구\n 여기에 사진필요"
         android:textSize="30dp" />
 
     <Button
@@ -32,10 +32,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
+
         android:textSize="60dp"
         android:textStyle="bold"
         android:textColor="@color/white"
         tools:text="@tools:sample/date/hhmmss"
-
     />
 </FrameLayout>
