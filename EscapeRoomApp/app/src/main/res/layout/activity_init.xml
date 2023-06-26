@@ -10,10 +10,11 @@
         android:id="@+id/initTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center|top"
-        android:paddingTop="200dp"
+        android:gravity="center_vertical"
+
+        android:padding="28dp"
         android:background="@color/silver"
-        android:text="세상의 악한 세력이... \n어쩌구 저쩌구\n 여기에 사진필요"
+        android:text="@string/start_script"
         android:textSize="30dp" />
 
     <Button
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
-
+        android:alpha="0.6"
         android:textSize="60dp"
         android:textStyle="bold"
         android:textColor="@color/white"

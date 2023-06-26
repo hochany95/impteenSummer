@@ -25,6 +25,7 @@ public class InitActivity extends AppCompatActivity {
     TextClock textClock;
     Button testButton;
     AlertDialog initDialog;
+    String TEST_COMMAND = "test0915";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class InitActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }else if(inputString.equalsIgnoreCase("test0915")){
+                }else if(inputString.equalsIgnoreCase(TEST_COMMAND)){
                     if (MyConfig.isTestMode()) {
                         MyConfig.setTestMode(false);
                         testButton.setVisibility(View.INVISIBLE);
@@ -93,6 +94,20 @@ public class InitActivity extends AppCompatActivity {
                 }else{
                     inputEditText.setHint("input here..");
                     Toast.makeText(getApplicationContext(), "Wrong, try again", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("test", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (MyConfig.isTestMode()) {
+                    MyConfig.setTestMode(false);
+                    testButton.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(), "change to user mode", Toast.LENGTH_SHORT).show();
+                } else {
+                    MyConfig.setTestMode(true);
+                    testButton.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "change to Test mode", Toast.LENGTH_SHORT).show();
                 }
             }
         });

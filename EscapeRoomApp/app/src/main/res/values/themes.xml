@@ -13,7 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <!-- hide status var -->
-        <item name="android:windowFullscreen">true</item>
+<!--        <item name="android:windowFullscreen">true</item>-->
     </style>
 
     <style name="ThemeOverlay.EscapeRoomApp.FullscreenContainer" parent="">

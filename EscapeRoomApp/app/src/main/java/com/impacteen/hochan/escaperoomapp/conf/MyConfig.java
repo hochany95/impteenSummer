@@ -17,4 +17,8 @@ public class MyConfig {
         return openedState;
     }
 
+    public static final int CORRECT_ANSWER = 0;
+    public static final int WRONG_ANSWER = 1;
+
+
 }

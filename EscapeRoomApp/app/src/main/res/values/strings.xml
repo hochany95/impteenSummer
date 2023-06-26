@@ -4,4 +4,15 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start_script">"
+        나는 어둠의 사도이다.
+        하나님의 자녀라고 하고 너희들을 시험하고자 한다
+        지혜를 구해봐라
+        정말 너희가 믿는 하나님이 존재한다면
+        너희가 풀 수 있겠지
+        어쩌구 저쩌구.,.
+        이후에는 이미지로
+        대체 예정입니다
+
+        "</string>
 </resources>
