@@ -50,7 +50,6 @@ public class InitActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showPasswordDialog();
-
             }
         });
         testButton.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +116,4 @@ public class InitActivity extends AppCompatActivity {
     private void showPasswordDialog(){
         initDialog.show();
     }
-
-
-
 }

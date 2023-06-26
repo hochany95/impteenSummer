@@ -21,28 +21,41 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button"
+        <ImageView
+            android:id="@+id/prevBtn"
+            android:src="@drawable/left_sample"
+            android:maxHeight="50dp"
+            android:adjustViewBounds="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_margin="10dp"
+            android:alpha="0.4"
             android:text="뒤로" />
 
-        <Button
-            android:id="@+id/button2"
+        <ImageView
+            android:id="@+id/helpBtn"
+            android:src="@drawable/help"
+            android:maxHeight="50dp"
+            android:adjustViewBounds="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
+            android:alpha="0.4"
             android:text="도움" />
 
-        <Button
-            android:id="@+id/button3"
+        <ImageView
+            android:id="@+id/nextBtn"
+            android:src="@drawable/right_sample"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxHeight="50dp"
+            android:adjustViewBounds="true"
             android:layout_alignParentRight="true"
             android:layout_margin="10dp"
+            android:alpha="0.4"
             android:text="다음" />
     </RelativeLayout>
 

@@ -3,7 +3,8 @@ package com.impacteen.hochan.escaperoomapp.conf;
 public class MyConfig {
 
     public static boolean testMode = false;
-    public static int openedState = 0;
+    public static int CurrentStage = 0;
+    public static int LAST_STAGE = 3;
 
     public static boolean isTestMode() {
         return testMode;
@@ -13,12 +14,14 @@ public class MyConfig {
         testMode = value;
     }
 
-    public static int getOpenedStage() {
-        return openedState;
+    public static int getCurrentStage() {
+        return CurrentStage;
     }
 
     public static final int CORRECT_ANSWER = 0;
     public static final int WRONG_ANSWER = 1;
+
+
 
 
 }

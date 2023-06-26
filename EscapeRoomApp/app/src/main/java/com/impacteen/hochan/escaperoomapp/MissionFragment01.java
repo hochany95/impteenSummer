@@ -18,7 +18,7 @@ import com.impacteen.hochan.escaperoomapp.databinding.FragmentMission01Binding;
 public class MissionFragment01 extends Fragment {
 
     FragmentMission01Binding binding;
-    public final int CURRENT_STAGE = 1;
+    public static final int CURRENT_STAGE = 1;
 
     private Context mContext;
     private AnswerEventListener mListener;
@@ -45,5 +45,9 @@ public class MissionFragment01 extends Fragment {
 
     public void registerListener(AnswerEventListener listener) {
         mListener = listener;
+    }
+
+    public Integer getFragmentIdx() {
+        return CURRENT_STAGE;
     }
 }
