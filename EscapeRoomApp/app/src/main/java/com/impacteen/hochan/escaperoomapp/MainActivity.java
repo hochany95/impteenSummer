@@ -24,6 +24,14 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
     MissionFragment01 missionFragment01;
     MissionFragment02 missionFragment02;
     MissionFragment03 missionFragment03;
+    MissionFragment04 missionFragment04;
+    MissionFragment05 missionFragment05;
+    MissionFragment06 missionFragment06;
+    MissionFragment07 missionFragment07;
+    MissionFragment08 missionFragment08;
+    MissionFragment09 missionFragment09;
+    MissionFragment10 missionFragment10;
+
     int currentStage = 0;
 
     ImageView prevBtn, helpBtn, nextBtn;
@@ -42,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
                 if(currentStage == MissionFragment01.CURRENT_STAGE){
                     onBackPressed();
                 }else{
-                    Toast.makeText(getApplicationContext(), "prev pressed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "prev pressed", Toast.LENGTH_SHORT).show();
                     changeFragment(currentStage-1);
                 }
 
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
                 if(currentStage == MyConfig.LAST_STAGE){
                     Toast.makeText(getApplicationContext(), "you can't move next", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getApplicationContext(), "next pressed", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "next pressed", Toast.LENGTH_SHORT).show();
                     changeFragment(currentStage+1);
                 }
             }
@@ -87,10 +95,31 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         missionFragment02.registerListener(this);
         missionFragment03 = new MissionFragment03(getApplicationContext());
         missionFragment03.registerListener(this);
+        missionFragment04 = new MissionFragment04(getApplicationContext());
+        missionFragment04.registerListener(this);
+        missionFragment05 = new MissionFragment05(getApplicationContext());
+        missionFragment05.registerListener(this);
+        missionFragment06 = new MissionFragment06(getApplicationContext());
+        missionFragment06.registerListener(this);
+        missionFragment07 = new MissionFragment07(getApplicationContext());
+        missionFragment07.registerListener(this);
+        missionFragment08 = new MissionFragment08(getApplicationContext());
+        missionFragment08.registerListener(this);
+        missionFragment09 = new MissionFragment09(getApplicationContext());
+        missionFragment09.registerListener(this);
+        missionFragment10 = new MissionFragment10(getApplicationContext());
+        missionFragment10.registerListener(this);
 
         fragmentMap.put(missionFragment01.getFragmentIdx(), missionFragment01);
         fragmentMap.put(missionFragment02.getFragmentIdx(), missionFragment02);
         fragmentMap.put(missionFragment03.getFragmentIdx(), missionFragment03);
+        fragmentMap.put(missionFragment04.getFragmentIdx(), missionFragment04);
+        fragmentMap.put(missionFragment05.getFragmentIdx(), missionFragment05);
+        fragmentMap.put(missionFragment06.getFragmentIdx(), missionFragment06);
+        fragmentMap.put(missionFragment07.getFragmentIdx(), missionFragment07);
+        fragmentMap.put(missionFragment08.getFragmentIdx(), missionFragment08);
+        fragmentMap.put(missionFragment09.getFragmentIdx(), missionFragment09);
+        fragmentMap.put(missionFragment10.getFragmentIdx(), missionFragment10);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
