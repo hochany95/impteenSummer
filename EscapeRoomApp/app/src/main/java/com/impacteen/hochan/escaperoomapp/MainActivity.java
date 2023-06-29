@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
                 if(currentStage == MissionFragment01.CURRENT_STAGE){
                     onBackPressed();
                 }else{
-//                    Toast.makeText(getApplicationContext(), "prev pressed", Toast.LENGTH_SHORT).show();
                     changeFragment(currentStage-1);
                 }
 
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         helpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getApplicationContext(), "call help - To-Do", Toast.LENGTH_SHORT).show();
             }
         });
 

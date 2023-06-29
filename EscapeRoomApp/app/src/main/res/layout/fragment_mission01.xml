@@ -21,16 +21,37 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/initscript" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:visibility="invisible"
+        android:src="@drawable/sample_image" />
 
-    <Button
+
+
+    <FrameLayout
+        android:id="@+id/lockScreen1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beige"
+        android:alpha="0.9"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/lock"
+            />
+    </FrameLayout>
+
+    <ImageView
         android:id="@+id/answer1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="20dp"
-        android:text="정답확인" />
+        android:src="@drawable/iconkeys"
+        android:maxHeight="40dp"
+        android:maxWidth="20dp" />
+
 </RelativeLayout>
