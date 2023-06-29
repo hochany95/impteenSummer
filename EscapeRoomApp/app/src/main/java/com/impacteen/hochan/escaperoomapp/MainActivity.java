@@ -21,6 +21,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements AnswerEventListener {
 
     public Map<Integer, Fragment> fragmentMap = new LinkedHashMap<>();
+    public Map<Integer, Boolean> isOpen = new LinkedHashMap<>();
     MissionFragment01 missionFragment01;
     MissionFragment02 missionFragment02;
     MissionFragment03 missionFragment03;
@@ -31,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
     MissionFragment08 missionFragment08;
     MissionFragment09 missionFragment09;
     MissionFragment10 missionFragment10;
-
-    int currentStage = 0;
 
     ImageView prevBtn, helpBtn, nextBtn;
     @Override
@@ -47,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             @Override
             public void onClick(View view) {
                 //이전 버튼
-                if(currentStage == MissionFragment01.CURRENT_STAGE){
+                if(MyConfig.CurrentStage == MissionFragment01.CURRENT_STAGE){
                     onBackPressed();
                 }else{
-                    changeFragment(currentStage-1);
+                    changeFragment(MyConfig.CurrentStage-1);
                 }
 
             }
@@ -68,11 +67,12 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(currentStage == MyConfig.LAST_STAGE){
+                if(MyConfig.CurrentStage == MyConfig.LAST_STAGE){
                     Toast.makeText(getApplicationContext(), "you can't move next", Toast.LENGTH_SHORT).show();
+                }else if(isOpen.get(MyConfig.CurrentStage)||MyConfig.isTestMode()){
+                    changeFragment(MyConfig.CurrentStage+1);
                 }else{
-//                    Toast.makeText(getApplicationContext(), "next pressed", Toast.LENGTH_SHORT).show();
-                    changeFragment(currentStage+1);
+                    Toast.makeText(getApplicationContext(), "Not opened yet", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.fragmentContainer, fragmentMap.get(idx));
         ft.commit();
-        currentStage = idx;
+        MyConfig.CurrentStage = idx;
     }
     public void initFragment() {
         missionFragment01 = new MissionFragment01(getApplicationContext());
@@ -119,18 +119,29 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         fragmentMap.put(missionFragment08.getFragmentIdx(), missionFragment08);
         fragmentMap.put(missionFragment09.getFragmentIdx(), missionFragment09);
         fragmentMap.put(missionFragment10.getFragmentIdx(), missionFragment10);
+        isOpen.put(missionFragment01.getFragmentIdx(), true);
+        isOpen.put(missionFragment02.getFragmentIdx(), false);
+        isOpen.put(missionFragment03.getFragmentIdx(), false);
+        isOpen.put(missionFragment04.getFragmentIdx(), false);
+        isOpen.put(missionFragment05.getFragmentIdx(), false);
+        isOpen.put(missionFragment06.getFragmentIdx(), false);
+        isOpen.put(missionFragment07.getFragmentIdx(), false);
+        isOpen.put(missionFragment08.getFragmentIdx(), false);
+        isOpen.put(missionFragment09.getFragmentIdx(), false);
+        isOpen.put(missionFragment10.getFragmentIdx(), false);
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction ft = manager.beginTransaction();
         ft.add(R.id.fragmentContainer, missionFragment01);
         ft.commit();
 
-        currentStage = missionFragment01.getFragmentIdx();
+        MyConfig.CurrentStage = missionFragment01.getFragmentIdx();
     }
     @Override
     public void event(int idx, int Event) {
         switch (Event) {
             case MyConfig.CORRECT_ANSWER:
+                isOpen.put(idx, true);
                 Toast.makeText(getApplicationContext(), "get answer from"+idx, Toast.LENGTH_SHORT).show();
                 break;
             case MyConfig.WRONG_ANSWER:

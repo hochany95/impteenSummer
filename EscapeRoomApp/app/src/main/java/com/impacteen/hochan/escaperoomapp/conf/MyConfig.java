@@ -5,6 +5,7 @@ public class MyConfig {
     public static boolean testMode = false;
     public static int CurrentStage = 0;
     public static int LAST_STAGE = 10;
+    public static int LastOpen = 0;
 
     public static boolean isTestMode() {
         return testMode;
