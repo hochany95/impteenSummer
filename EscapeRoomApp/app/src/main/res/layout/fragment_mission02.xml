@@ -25,13 +25,13 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:visibility="invisible"
-        android:src="@drawable/sample_image" />
+        android:src="@drawable/sample_image"
+        />
+
+
     <FrameLayout
-        android:id="@+id/lockScreen1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/beige"
-        android:alpha="0.9"
+        android:id="@+id/lockScreen2"
+        style="@style/LockScreen"
         >
         <ImageView
             android:layout_width="match_parent"
@@ -39,14 +39,4 @@
             android:src="@drawable/lock"
             />
     </FrameLayout>
-    <ImageView
-        android:id="@+id/answer2"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:src="@drawable/iconkeys"
-        android:maxHeight="40dp"
-        android:maxWidth="20dp" />
 </RelativeLayout>

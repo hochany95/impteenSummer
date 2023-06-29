@@ -25,7 +25,7 @@ public class InitActivity extends AppCompatActivity {
     TextClock textClock;
     Button testButton;
     AlertDialog initDialog;
-    String TEST_COMMAND = "test0915";
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +67,7 @@ public class InitActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout dialogLayout = (LinearLayout) inflater.inflate(R.layout.init_password_dialog, null);
 
-        EditText inputEditText = (EditText) dialogLayout.findViewById(R.id.editTextText);
+        EditText inputEditText = (EditText) dialogLayout.findViewById(R.id.inputBox);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
@@ -80,7 +80,7 @@ public class InitActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }else if(inputString.equalsIgnoreCase(TEST_COMMAND)){
+                }else if(inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
                     if (MyConfig.isTestMode()) {
                         MyConfig.setTestMode(false);
                         testButton.setVisibility(View.INVISIBLE);

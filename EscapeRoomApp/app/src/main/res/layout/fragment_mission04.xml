@@ -24,14 +24,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
+        android:visibility="invisible"
         android:src="@drawable/sample_image"/>
+    <FrameLayout
+        android:id="@+id/lockScreen4"
+        style="@style/LockScreen"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/lock"
+            />
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/answer4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:text="정답확인" />
 </RelativeLayout>

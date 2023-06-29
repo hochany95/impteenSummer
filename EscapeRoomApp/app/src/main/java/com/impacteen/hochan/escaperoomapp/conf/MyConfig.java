@@ -5,7 +5,7 @@ public class MyConfig {
     public static boolean testMode = false;
     public static int CurrentStage = 0;
     public static int LAST_STAGE = 10;
-    public static int LastOpen = 0;
+    public static int LAST_OPEN = 1;
 
     public static boolean isTestMode() {
         return testMode;
@@ -21,6 +21,8 @@ public class MyConfig {
 
     public static final int CORRECT_ANSWER = 0;
     public static final int WRONG_ANSWER = 1;
+
+    public static final String TEST_COMMAND = "0915";
 
 
 

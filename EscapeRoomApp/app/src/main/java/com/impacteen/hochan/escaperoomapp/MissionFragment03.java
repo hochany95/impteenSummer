@@ -23,13 +23,13 @@ public class MissionFragment03 extends Fragment {
     private Context mContext;
     private AnswerEventListener mListener;
 
-    public MissionFragment03(Context applicationContext) {
-        mContext = applicationContext;
+    public MissionFragment03() {
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mContext = container.getContext();
         binding = FragmentMission03Binding.inflate(inflater, container, false);
         binding.answer3.setOnClickListener(view -> {
             mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);

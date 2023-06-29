@@ -88,25 +88,25 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         MyConfig.CurrentStage = idx;
     }
     public void initFragment() {
-        missionFragment01 = new MissionFragment01(getApplicationContext());
+        missionFragment01 = new MissionFragment01();
         missionFragment01.registerListener(this);
-        missionFragment02 = new MissionFragment02(getApplicationContext());
+        missionFragment02 = new MissionFragment02();
         missionFragment02.registerListener(this);
-        missionFragment03 = new MissionFragment03(getApplicationContext());
+        missionFragment03 = new MissionFragment03();
         missionFragment03.registerListener(this);
-        missionFragment04 = new MissionFragment04(getApplicationContext());
+        missionFragment04 = new MissionFragment04();
         missionFragment04.registerListener(this);
-        missionFragment05 = new MissionFragment05(getApplicationContext());
+        missionFragment05 = new MissionFragment05();
         missionFragment05.registerListener(this);
-        missionFragment06 = new MissionFragment06(getApplicationContext());
+        missionFragment06 = new MissionFragment06();
         missionFragment06.registerListener(this);
-        missionFragment07 = new MissionFragment07(getApplicationContext());
+        missionFragment07 = new MissionFragment07();
         missionFragment07.registerListener(this);
-        missionFragment08 = new MissionFragment08(getApplicationContext());
+        missionFragment08 = new MissionFragment08();
         missionFragment08.registerListener(this);
-        missionFragment09 = new MissionFragment09(getApplicationContext());
+        missionFragment09 = new MissionFragment09();
         missionFragment09.registerListener(this);
-        missionFragment10 = new MissionFragment10(getApplicationContext());
+        missionFragment10 = new MissionFragment10();
         missionFragment10.registerListener(this);
 
         fragmentMap.put(missionFragment01.getFragmentIdx(), missionFragment01);
@@ -141,7 +141,13 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
     public void event(int idx, int Event) {
         switch (Event) {
             case MyConfig.CORRECT_ANSWER:
-                isOpen.put(idx, true);
+                if(idx < MyConfig.LAST_STAGE){
+                    isOpen.put(idx+1, true);
+                    MyConfig.LAST_OPEN = idx+1;
+                }else{
+                    Toast.makeText(getApplicationContext(), "마지막 문이 열렸습니다", Toast.LENGTH_SHORT).show();
+                }
+
                 Toast.makeText(getApplicationContext(), "get answer from"+idx, Toast.LENGTH_SHORT).show();
                 break;
             case MyConfig.WRONG_ANSWER:

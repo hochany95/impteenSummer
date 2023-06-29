@@ -27,8 +27,4 @@
         android:visibility="visible"
         android:src="@drawable/sample_image" />
 
-
-
-
-
 </RelativeLayout>

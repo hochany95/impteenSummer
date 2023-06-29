@@ -25,13 +25,14 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:src="@drawable/sample_image" />
-
-    <Button
-        android:id="@+id/answer3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:text="정답확인" />
+    <FrameLayout
+        android:id="@+id/lockScreen3"
+        style="@style/LockScreen"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/lock"
+            />
+    </FrameLayout>
 </RelativeLayout>
