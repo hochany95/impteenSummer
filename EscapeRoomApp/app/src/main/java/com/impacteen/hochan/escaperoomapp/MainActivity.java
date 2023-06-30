@@ -1,14 +1,14 @@
 package com.impacteen.hochan.escaperoomapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -61,7 +61,32 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "call help - To-Do", Toast.LENGTH_SHORT).show();
             }
+
+
         });
+        helpBtn.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("init");
+                builder.setMessage("셋팅을 초기화 하시겠습니까?");
+                builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        initFragment();
+                        MyConfig.TEST_MODE = false;
+                        MyConfig.LAST_OPEN = 1;
+                        MyConfig.CurrentStage = 0;
+                        Toast.makeText(getApplicationContext(), "모든 값을 초기화 합니다.", Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("취소", null);
+                builder.show();
+                return true;
+            };
+        });
+
 
         nextBtn = (ImageView) findViewById(R.id.nextBtn);
         nextBtn.setOnClickListener(new View.OnClickListener() {

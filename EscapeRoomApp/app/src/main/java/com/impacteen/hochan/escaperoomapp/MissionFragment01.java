@@ -89,7 +89,7 @@ public class MissionFragment01 extends Fragment {
                     Toast.makeText(mContext, "Wrong, try again", Toast.LENGTH_SHORT).show();
                 }
                 inputPW.setText("");
-                inputPW.setHint("input here..");
+                inputPW.setHint("  input here..");
             }
         });
         builder.setNegativeButton("test", new DialogInterface.OnClickListener() {

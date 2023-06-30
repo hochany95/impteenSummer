@@ -25,6 +25,6 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:visibility="visible"
-        android:src="@drawable/sample_image" />
+        android:src="@drawable/zoom_script" />
 
 </RelativeLayout>

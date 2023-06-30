@@ -6,19 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".InitActivity">
 
-    <TextView
-        android:id="@+id/initTextView"
+<!--    <TextView-->
+<!--        android:id="@+id/initTextView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:gravity="center_vertical"-->
+
+<!--        android:padding="28dp"-->
+<!--        android:background="@color/silver"-->
+<!--        android:text="@string/start_script"-->
+<!--        android:textSize="30dp" />-->
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
-
-        android:padding="28dp"
-        android:background="@color/silver"
-        android:text="@string/start_script"
-        android:textSize="30dp" />
+        android:src="@drawable/init_screen_image"
+        />
 
     <Button
-        android:id="@+id/initNextBtn"
+        android:id="@+id/testModeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
@@ -28,7 +33,7 @@
         android:text="next" />
 
     <TextClock
-        android:id="@+id/textClock"
+        android:id="@+id/initScreenClock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

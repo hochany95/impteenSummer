@@ -18,41 +18,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
+import com.impacteen.hochan.escaperoomapp.databinding.ActivityInitBinding;
 
 public class InitActivity extends AppCompatActivity {
-
-    TextView backgroundView;
-    TextClock textClock;
-    Button testButton;
     AlertDialog initDialog;
-
+    ActivityInitBinding binding;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_init);
+        binding = ActivityInitBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        backgroundView = (TextView) findViewById(R.id.initTextView);
-        textClock = (TextClock) findViewById(R.id.textClock);
-        textClock.setAlpha((float) 0.4);
-        testButton = (Button) findViewById(R.id.initNextBtn);
-        if(MyConfig.isTestMode()){
-            testButton.setVisibility(View.VISIBLE);
-        }
+
+
         createPasswordDialog();
-        testButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "어따쓰지", Toast.LENGTH_SHORT).show();
-            }
-        });
-        textClock.setOnClickListener(new View.OnClickListener() {
+        binding.initScreenClock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPasswordDialog();
             }
         });
-        testButton.setOnClickListener(new View.OnClickListener() {
+
+        //test를 위한 버튼, 제거 필요
+        binding.testModeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MyConfig.isTestMode()) {
@@ -61,6 +50,16 @@ public class InitActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(MyConfig.isTestMode()){
+            binding.testModeBtn.setVisibility(View.VISIBLE);
+        } else{
+            binding.testModeBtn.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void createPasswordDialog() {
@@ -77,17 +76,18 @@ public class InitActivity extends AppCompatActivity {
                 String inputString = inputEditText.getText().toString();
                 inputEditText.setText("");
                 if(inputString.equalsIgnoreCase("three")){
-
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }else if(inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                }
+                // test를 위한 암호 - 제거 필요
+                else if(inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
                     if (MyConfig.isTestMode()) {
                         MyConfig.setTestMode(false);
-                        testButton.setVisibility(View.INVISIBLE);
+                        binding.testModeBtn.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), "change to user mode", Toast.LENGTH_SHORT).show();
                     } else {
                         MyConfig.setTestMode(true);
-                        testButton.setVisibility(View.VISIBLE);
+                        binding.testModeBtn.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(), "change to Test mode", Toast.LENGTH_SHORT).show();
                     }
                 }else{
@@ -101,12 +101,12 @@ public class InitActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 if (MyConfig.isTestMode()) {
                     MyConfig.setTestMode(false);
-                    testButton.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(), "change to user mode", Toast.LENGTH_SHORT).show();
+                    binding.testModeBtn.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(), "TEST MODE OFF", Toast.LENGTH_SHORT).show();
                 } else {
                     MyConfig.setTestMode(true);
-                    testButton.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(), "change to Test mode", Toast.LENGTH_SHORT).show();
+                    binding.testModeBtn.setVisibility(View.VISIBLE);
+                    Toast.makeText(getApplicationContext(), "TEST MODE ON", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -115,5 +115,12 @@ public class InitActivity extends AppCompatActivity {
 
     private void showPasswordDialog(){
         initDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), "앱이 꺼지지 않도록 하자", Toast.LENGTH_SHORT).show();
+//
+//        super.onBackPressed();
     }
 }
