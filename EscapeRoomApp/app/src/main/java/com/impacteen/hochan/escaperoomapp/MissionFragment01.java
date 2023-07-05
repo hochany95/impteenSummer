@@ -33,7 +33,7 @@ public class MissionFragment01 extends Fragment {
     public static final int CURRENT_STAGE = 1;
     private Context mContext;
     private AnswerEventListener mListener;
-    private String answer = "test1";
+    private String answer = "454223";
     private TextView dialogTextView;
     private AlertDialog currentDialog;
     public MissionFragment01() {
