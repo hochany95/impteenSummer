@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
 import com.impacteen.hochan.escaperoomapp.databinding.FragmentMission01Binding;
 
 
+
 public class MissionFragment01 extends Fragment {
     /*
     * 줌으로 나온 스크립트가 보인다.
@@ -33,9 +35,10 @@ public class MissionFragment01 extends Fragment {
     public static final int CURRENT_STAGE = 1;
     private Context mContext;
     private AnswerEventListener mListener;
-    private String answer = "454223";
+    private String ANSWER = "454223";
     private TextView dialogTextView;
     private AlertDialog currentDialog;
+
     public MissionFragment01() {
     }
 
@@ -45,12 +48,27 @@ public class MissionFragment01 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mContext = container.getContext();
-        createPasswordDialog();
+//        createPasswordDialog();
         binding = FragmentMission01Binding.inflate(inflater, container, false);
         //하단 버튼을 사용할 경우에 필요
         binding.imageView1.setOnClickListener(view -> {
-            showPasswordDialog();
+//            showPasswordDialog();
         });
+        binding.answerBox1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if(i == KeyEvent.KEYCODE_ENTER){
+                    String inputString = binding.answerBox1.getText().toString();
+
+                    if(inputString.equals(ANSWER)||inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                        mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
+                        mListener.event(CURRENT_STAGE, MyConfig.GO_NEXT);
+                    }
+                }
+                return true;
+            }
+        });
+
         return binding.getRoot();
     }
 
@@ -82,7 +100,7 @@ public class MissionFragment01 extends Fragment {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String inputString = inputPW.getText().toString();
 
-                if(inputString.equalsIgnoreCase(answer)||inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                if(inputString.equalsIgnoreCase(ANSWER)||inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
                     mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
                     Toast.makeText(mContext, "다음 페이지가 열립니다", Toast.LENGTH_SHORT).show();
                 }else{

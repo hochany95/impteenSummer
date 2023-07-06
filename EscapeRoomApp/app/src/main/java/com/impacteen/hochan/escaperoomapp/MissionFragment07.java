@@ -32,9 +32,7 @@ public class MissionFragment07 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = container.getContext();
         binding = FragmentMission07Binding.inflate(inflater, container, false);
-        binding.answer7.setOnClickListener(view -> {
-            mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-        });
+
         return binding.getRoot();
     }
 

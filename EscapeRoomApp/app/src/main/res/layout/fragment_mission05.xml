@@ -26,15 +26,6 @@
         android:adjustViewBounds="true"
         android:visibility="invisible"
         android:src="@drawable/sample_image" />
-    <FrameLayout
-        android:id="@+id/lockScreen5"
-        style="@style/LockScreen"
-        >
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/lock"
-            />
-    </FrameLayout>
+
 
 </RelativeLayout>

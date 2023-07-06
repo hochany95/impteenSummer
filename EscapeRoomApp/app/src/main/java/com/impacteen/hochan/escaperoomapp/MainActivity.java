@@ -103,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         });
 
     }
+    private void moveNextFragment(int current){
 
+    }
 
     public void changeFragment(Integer idx) {
         FragmentManager manager = getSupportFragmentManager();
@@ -178,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             case MyConfig.WRONG_ANSWER:
                 Toast.makeText(getApplicationContext(), "get wrong from"+idx, Toast.LENGTH_SHORT).show();
                 break;
+            case MyConfig.GO_NEXT:
+
             default:
                 Toast.makeText(getApplicationContext(), "get unexpected message from"+idx, Toast.LENGTH_SHORT).show();
                 break;

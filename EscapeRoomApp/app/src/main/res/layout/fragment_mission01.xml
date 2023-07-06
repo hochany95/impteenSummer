@@ -17,14 +17,40 @@
         android:layout_centerInParent="true"
         android:layout_margin="20dp"
         android:textSize="40dp"
-        android:text="1번째 문제입니다" />
+        android:fontFamily="@font/amarillo"
+        android:text="Step 1" />
 
-    <ImageView
-        android:id="@+id/imageView1"
+    <LinearLayout
+        android:id="@+id/centerLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_alpha_background"
+        android:layout_margin="15dp"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:visibility="visible"
+            android:src="@drawable/zoom_script_ex1" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/answerBox1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:visibility="visible"
-        android:src="@drawable/zoom_script_screen" />
-
+        android:layout_height="40dp"
+        android:layout_below="@id/centerLayout1"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/main_background"
+        android:ems="13"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
+        android:textSize="20dp" />
 </RelativeLayout>

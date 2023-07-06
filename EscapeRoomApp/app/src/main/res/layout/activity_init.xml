@@ -4,7 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/init_backscreen"
     tools:context=".InitActivity">
+    <LinearLayout
+        android:id="@+id/initBookButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="80dp"
+            android:src="@drawable/init_book"
+            android:layout_marginBottom="60dp"/>
+    </LinearLayout>
+
     <TextClock
         android:id="@+id/initScreenClock"
         android:layout_width="match_parent"
@@ -20,12 +36,24 @@
         />
 
     <ImageView
+        android:id="@+id/initQuestion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:paddingTop="160dp"
+        android:visibility="invisible"
+        android:background="@color/white"
+        android:alpha="0.8"
         android:src="@drawable/init_lock_screen"
         />
+
+    <ImageView
+        android:id="@+id/initStartBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/init_start_button_image"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp" />
+
 
     <Button
         android:id="@+id/testModeBtn"

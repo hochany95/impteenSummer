@@ -30,8 +30,6 @@ public class InitActivity extends AppCompatActivity {
         binding = ActivityInitBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         createPasswordDialog();
         binding.initScreenClock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +45,17 @@ public class InitActivity extends AppCompatActivity {
                 if (MyConfig.isTestMode()) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                }
+            }
+        });
+        binding.initStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int isVisible = binding.initQuestion.getVisibility();
+                if(isVisible == View.VISIBLE){
+                    binding.initQuestion.setVisibility(View.INVISIBLE);
+                }else{
+                    binding.initQuestion.setVisibility(View.VISIBLE);
                 }
             }
         });

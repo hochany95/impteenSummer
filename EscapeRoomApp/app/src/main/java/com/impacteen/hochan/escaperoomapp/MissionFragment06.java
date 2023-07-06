@@ -31,9 +31,7 @@ public class MissionFragment06 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = container.getContext();
         binding = FragmentMission06Binding.inflate(inflater, container, false);
-        binding.answer6.setOnClickListener(view -> {
-            mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-        });
+
         return binding.getRoot();
     }
 

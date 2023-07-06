@@ -49,11 +49,6 @@ public class MissionFragment02 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //잠금화면 조절
-        if (MyConfig.LAST_OPEN >= CURRENT_STAGE) {
-            binding.lockScreen2.setVisibility(View.GONE);
-            binding.imageView2.setVisibility(View.VISIBLE);
-        }
 
     }
 

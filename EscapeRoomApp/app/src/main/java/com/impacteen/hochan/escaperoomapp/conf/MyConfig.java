@@ -21,6 +21,7 @@ public class MyConfig {
 
     public static final int CORRECT_ANSWER = 0;
     public static final int WRONG_ANSWER = 1;
+    public static final int GO_NEXT = 2;
 
     public static final String TEST_COMMAND = "0915";
 
