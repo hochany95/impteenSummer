@@ -45,6 +45,7 @@ public class InitActivity extends AppCompatActivity {
                 if (MyConfig.isTestMode()) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
                 }
             }
         });

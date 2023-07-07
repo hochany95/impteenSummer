@@ -59,9 +59,11 @@
         android:id="@+id/testModeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
+
         android:visibility="invisible"
-        android:layout_marginBottom="44dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_gravity="right|bottom"
         android:text="next" />
 
