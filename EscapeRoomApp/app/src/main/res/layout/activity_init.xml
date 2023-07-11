@@ -7,13 +7,14 @@
     android:background="@drawable/init_backscreen"
     tools:context=".InitActivity">
     <LinearLayout
-        android:id="@+id/initBookButton"
+        android:id="@+id/initBookBtnContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:orientation="vertical">
         <ImageView
+            android:id="@+id/initBookBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="80dp"

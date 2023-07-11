@@ -7,9 +7,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
@@ -22,6 +25,7 @@ public class MissionFragment03 extends Fragment {
 
     private Context mContext;
     private AnswerEventListener mListener;
+    private String ANSWER = "0729";
 
     public MissionFragment03() {
     }
@@ -31,9 +35,30 @@ public class MissionFragment03 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mContext = container.getContext();
         binding = FragmentMission03Binding.inflate(inflater, container, false);
-//        binding.answer3.setOnClickListener(view -> {
-//            mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-//        });
+        binding.imageView3.setOnClickListener(view -> {
+        });
+        binding.answerBox3.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+                String inputAnswer = textView.getText().toString();
+                textView.setText("");
+
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                    mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
+                }else{
+                    mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);
+
+                }
+                binding.answerBox3.clearFocus();
+                MainActivity.inputManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+                return true;
+
+            }
+        });
+
+
         return binding.getRoot();
     }
 

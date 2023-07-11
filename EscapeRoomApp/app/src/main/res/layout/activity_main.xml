@@ -38,7 +38,7 @@
 
         <ImageView
             android:id="@+id/nextBtn"
-            android:src="@drawable/right_sample"
+            android:src="@drawable/test_next_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxHeight="50dp"
@@ -53,6 +53,8 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:layout_below="@+id/main_activity_btn_layout">
     </FrameLayout>
 

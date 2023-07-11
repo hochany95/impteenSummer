@@ -13,6 +13,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +23,6 @@ import android.widget.Toast;
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
 import com.impacteen.hochan.escaperoomapp.databinding.FragmentMission01Binding;
-
 
 
 public class MissionFragment01 extends Fragment {
@@ -36,39 +36,40 @@ public class MissionFragment01 extends Fragment {
     private Context mContext;
     private AnswerEventListener mListener;
     private String ANSWER = "454223";
-    private TextView dialogTextView;
-    private AlertDialog currentDialog;
+
 
     public MissionFragment01() {
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         mContext = container.getContext();
-//        createPasswordDialog();
         binding = FragmentMission01Binding.inflate(inflater, container, false);
         //하단 버튼을 사용할 경우에 필요
         binding.imageView1.setOnClickListener(view -> {
-//            showPasswordDialog();
         });
-        binding.answerBox1.setOnKeyListener(new View.OnKeyListener() {
+        binding.answerBox1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if(i == KeyEvent.KEYCODE_ENTER){
-                    String inputString = binding.answerBox1.getText().toString();
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-                    if(inputString.equals(ANSWER)||inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
-                        mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-                        mListener.event(CURRENT_STAGE, MyConfig.GO_NEXT);
-                    }
+                String inputAnswer = textView.getText().toString();
+                textView.setText("");
+
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                    mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
+                }else{
+                    mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);
+
                 }
+                binding.answerBox1.clearFocus();
+                MainActivity.inputManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
                 return true;
+
             }
         });
-
         return binding.getRoot();
     }
 
@@ -84,45 +85,6 @@ public class MissionFragment01 extends Fragment {
 
     public Integer getFragmentIdx() {
         return CURRENT_STAGE;
-    }
-    private void createPasswordDialog() {
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        LinearLayout dialogLayout = (LinearLayout) inflater.inflate(R.layout.init_password_dialog, null);
-
-        EditText inputPW = (EditText) dialogLayout.findViewById(R.id.inputBox);
-        dialogTextView = dialogLayout.findViewById(R.id.dialogTextView);
-        dialogTextView.setText("첫 번째 문제입니다.");
-        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setView(dialogLayout);
-
-        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String inputString = inputPW.getText().toString();
-
-                if(inputString.equalsIgnoreCase(ANSWER)||inputString.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
-                    mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-                    Toast.makeText(mContext, "다음 페이지가 열립니다", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(mContext, "Wrong, try again", Toast.LENGTH_SHORT).show();
-                }
-                inputPW.setText("");
-                inputPW.setHint("  input here..");
-            }
-        });
-        builder.setNegativeButton("test", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
-                Toast.makeText(mContext, "test mode.", Toast.LENGTH_SHORT).show();
-            }
-        });
-        currentDialog = builder.create();
-
-    }
-
-    private void showPasswordDialog(){
-        currentDialog.show();
     }
 
 }

@@ -7,13 +7,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.view.View;
-import android.widget.ImageView;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
+import com.impacteen.hochan.escaperoomapp.databinding.ActivityMainBinding;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,49 +27,69 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
 
     public Map<Integer, Fragment> fragmentMap = new LinkedHashMap<>();
     public Map<Integer, Boolean> isOpen = new LinkedHashMap<>();
-    MissionFragment01 missionFragment01;
-    MissionFragment02 missionFragment02;
-    MissionFragment03 missionFragment03;
-    MissionFragment04 missionFragment04;
-    MissionFragment05 missionFragment05;
-    MissionFragment06 missionFragment06;
-    MissionFragment07 missionFragment07;
-    MissionFragment08 missionFragment08;
-    MissionFragment09 missionFragment09;
-    MissionFragment10 missionFragment10;
+    public MissionFragment01 missionFragment01;
+    public MissionFragment02 missionFragment02;
+    public MissionFragment03 missionFragment03;
+    public  MissionFragment04 missionFragment04;
+    public MissionFragment05 missionFragment05;
+    public  MissionFragment06 missionFragment06;
+    public  MissionFragment07 missionFragment07;
+    public  MissionFragment08 missionFragment08;
+    public  MissionFragment09 missionFragment09;
+    public  MissionFragment10 missionFragment10;
 
-    ImageView prevBtn, helpBtn, nextBtn;
+    public  ActivityMainBinding binding;
+
+    public static InputMethodManager inputManager;
+
+    public MediaPlayer player;
+    public static Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initFragment();
 
-        prevBtn = (ImageView) findViewById(R.id.prevBtn);
-        prevBtn.setOnClickListener(new View.OnClickListener() {
+        //진동 매니저
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            VibratorManager vibManager = (VibratorManager) getSystemService(VIBRATOR_MANAGER_SERVICE);
+            vibrator = vibManager.getDefaultVibrator();
+        }else{
+            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        }
+
+        //키보드 매니저
+        inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+
+        //BGM
+        player = MediaPlayer.create(this, R.raw.sample_main_music);
+        player.setLooping(true);
+
+        //이전 문제로 가는 버튼
+        binding.prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //이전 버튼
-                if(MyConfig.CurrentStage == MissionFragment01.CURRENT_STAGE){
-                    onBackPressed();
-                }else{
-                    changeFragment(MyConfig.CurrentStage-1);
-                }
-
+                movePrevFragment();
             }
         });
 
-        helpBtn = (ImageView) findViewById(R.id.helpBtn);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
+        binding.helpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "call help - To-Do", Toast.LENGTH_SHORT).show();
             }
-
-
         });
-        helpBtn.setOnLongClickListener(new View.OnLongClickListener() {
+
+        //테스트 모드의 경우에 활성화
+        if(MyConfig.isTestMode()){
+            binding.nextBtn.setVisibility(View.VISIBLE);
+        }else{
+            binding.nextBtn.setVisibility(View.GONE);
+        }
+        binding.helpBtn.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -87,9 +112,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             };
         });
 
-
-        nextBtn = (ImageView) findViewById(R.id.nextBtn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
+        binding.nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(MyConfig.CurrentStage == MyConfig.LAST_STAGE){
@@ -102,9 +125,41 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             }
         });
 
-    }
-    private void moveNextFragment(int current){
 
+    }
+
+    @Override
+    protected void onResume() {
+        player.start();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        player.pause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        player.stop();
+        player.release();
+        super.onUserLeaveHint();
+    }
+
+    @Override
+    protected void onDestroy() {
+        player.stop();
+        player.release();
+        super.onDestroy();
+    }
+    @Override
+    public void onBackPressed() {
+        if (MyConfig.CurrentStage == MissionFragment01.CURRENT_STAGE) {
+            super.onBackPressed();
+        }else{
+            changeFragment(MyConfig.CurrentStage - 1);
+        }
     }
 
     public void changeFragment(Integer idx) {
@@ -114,6 +169,27 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         ft.commit();
         MyConfig.CurrentStage = idx;
     }
+
+    private void moveNextFragment(int idx){
+        if(idx < MyConfig.LAST_STAGE){
+            isOpen.put(idx+1, true);
+            changeFragment(idx+1);
+        }else{
+            MoveLastActivity();
+        }
+    }
+    private void movePrevFragment(){
+        if(MyConfig.CurrentStage == MissionFragment01.CURRENT_STAGE){
+            onBackPressed();
+        }else{
+            changeFragment(MyConfig.CurrentStage-1);
+        }
+    }
+    private void MoveLastActivity() {
+        //To-Do
+        Toast.makeText(getApplicationContext(), "아직 마지막 페이지가 준비 되지 않았습니다.", Toast.LENGTH_SHORT).show();
+    }
+
     public void initFragment() {
         missionFragment01 = new MissionFragment01();
         missionFragment01.registerListener(this);
@@ -164,23 +240,28 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
 
         MyConfig.CurrentStage = missionFragment01.getFragmentIdx();
     }
+
+
     @Override
     public void event(int idx, int Event) {
         switch (Event) {
             case MyConfig.CORRECT_ANSWER:
-                if(idx < MyConfig.LAST_STAGE){
-                    isOpen.put(idx+1, true);
-                    MyConfig.LAST_OPEN = idx+1;
-                }else{
-                    Toast.makeText(getApplicationContext(), "마지막 문이 열렸습니다", Toast.LENGTH_SHORT).show();
-                }
-
-                Toast.makeText(getApplicationContext(), "get answer from"+idx, Toast.LENGTH_SHORT).show();
-                break;
-            case MyConfig.WRONG_ANSWER:
-                Toast.makeText(getApplicationContext(), "get wrong from"+idx, Toast.LENGTH_SHORT).show();
-                break;
             case MyConfig.GO_NEXT:
+                moveNextFragment(idx);
+                break;
+
+            case MyConfig.WRONG_ANSWER:
+                vibrator.vibrate(500);
+                Toast.makeText(getApplicationContext(), "정답이 아닌 것 같다.", Toast.LENGTH_SHORT).show();
+                break;
+
+            case MyConfig.PAUSE_MUSIC:
+                player.pause();
+                break;
+
+            case MyConfig.REPLAY_MUSIC:
+                player.start();
+                break;
 
             default:
                 Toast.makeText(getApplicationContext(), "get unexpected message from"+idx, Toast.LENGTH_SHORT).show();

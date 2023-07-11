@@ -23,6 +23,9 @@ public class MyConfig {
     public static final int WRONG_ANSWER = 1;
     public static final int GO_NEXT = 2;
 
+    public static final int PAUSE_MUSIC = 3;
+    public static final int REPLAY_MUSIC = 4;
+
     public static final String TEST_COMMAND = "0915";
 
 
