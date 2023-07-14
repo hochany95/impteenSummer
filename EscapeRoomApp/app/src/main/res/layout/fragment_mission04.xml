@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:visibility="visible"
-            android:src="@drawable/step4_image_sample" />
+            android:src="@drawable/step4_image" />
     </LinearLayout>
 
     <LinearLayout
