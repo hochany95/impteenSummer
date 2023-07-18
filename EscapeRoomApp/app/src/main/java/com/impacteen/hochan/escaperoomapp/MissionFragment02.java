@@ -1,8 +1,6 @@
 package com.impacteen.hochan.escaperoomapp;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,10 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
@@ -48,7 +43,7 @@ public class MissionFragment02 extends Fragment {
                 String inputAnswer = textView.getText().toString();
                 textView.setText("");
 
-                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
                     mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
                 }else{
                     mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);

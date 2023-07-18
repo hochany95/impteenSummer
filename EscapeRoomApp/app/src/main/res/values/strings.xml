@@ -1,18 +1,98 @@
 <resources>
-    <string name="app_name">EscapeRoomApp</string>
+    <string name="app_name">letter from</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="start_script">"
-        나는 어둠의 사도이다.
-        하나님의 자녀라고 하고 너희들을 시험하고자 한다
-        지혜를 구해봐라
-        정말 너희가 믿는 하나님이 존재한다면
-        너희가 풀 수 있겠지
-        어쩌구 저쩌구.,.
-        이후에는 이미지로
-        대체 예정입니다
 
-        "</string>
+    <string name="title_activity_last_activitry">LastActivitry</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="rules">
+        "
+        1. 휴대폰은 조장이 관리한다
+        2. 앱이 커지지 않도록 조심하자
+        3. 배경음악 소리를 끄지 말자
+        4. 다른 사람의 짐을 뒤지지 말자
+        5. 기물을 파손하지 말자
+        * 같이 협력하여 게임에서 승리하자 *
+        "
+    </string>
+    <string name="hintWarning">
+        "
+        힌트 사용시 10분의 시간이 추가됩니다.
+        다음 힌트는 10분 뒤 사용 가능합니다.
+        힌트를 사용하시겠습니까?
+        "
+    </string>
+    <string name="project1Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project2Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project3Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project4Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project5Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project6Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project7int">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project8Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+    <string name="project9Hint">
+        "
+        시계나 숫자가 아닌 전체 그림을 한 번에 보자
+        5개의 o에 각각 들어갈 글자가 무엇일까?
+        답은 영어이다";
+        "
+    </string>
+
+
+
+
 </resources>

@@ -4,21 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
@@ -36,7 +29,6 @@ public class MissionFragment01 extends Fragment {
     private Context mContext;
     private AnswerEventListener mListener;
     private String ANSWER = "454223";
-
 
     public MissionFragment01() {
     }
@@ -57,7 +49,7 @@ public class MissionFragment01 extends Fragment {
                 String inputAnswer = textView.getText().toString();
                 textView.setText("");
 
-                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
                     mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
                 }else{
                     mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);
@@ -86,5 +78,6 @@ public class MissionFragment01 extends Fragment {
     public Integer getFragmentIdx() {
         return CURRENT_STAGE;
     }
+
 
 }

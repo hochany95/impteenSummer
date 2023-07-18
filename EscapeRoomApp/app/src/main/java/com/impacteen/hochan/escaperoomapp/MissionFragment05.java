@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
-import com.impacteen.hochan.escaperoomapp.databinding.FragmentMission04Binding;
 import com.impacteen.hochan.escaperoomapp.databinding.FragmentMission05Binding;
 
 public class MissionFragment05 extends Fragment {
@@ -49,7 +47,7 @@ public class MissionFragment05 extends Fragment {
                 String inputAnswer = textView.getText().toString();
                 textView.setText("");
 
-                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
                     mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
                 }else{
                     mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);
@@ -83,7 +81,7 @@ public class MissionFragment05 extends Fragment {
     @Override
     public void onPause() {
         if(BGMPaused){
-            mListener.event(CURRENT_STAGE, MyConfig.REPLAY_MUSIC);
+            mListener.event(CURRENT_STAGE, MyConfig.RESUME_MUSIC);
         }
 
         super.onPause();

@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.EscapeRoomApp.FullscreenContainer">
 
+
     <TextView
         android:id="@+id/currentStateScript5"
         android:layout_width="wrap_content"

@@ -26,7 +26,6 @@ public class MissionFragment03 extends Fragment {
     private Context mContext;
     private AnswerEventListener mListener;
     private String ANSWER = "0729";
-
     public MissionFragment03() {
     }
 
@@ -44,7 +43,7 @@ public class MissionFragment03 extends Fragment {
                 String inputAnswer = textView.getText().toString();
                 textView.setText("");
 
-                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_COMMAND)){
+                if(inputAnswer.equals(ANSWER)||inputAnswer.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
                     mListener.event(CURRENT_STAGE, MyConfig.CORRECT_ANSWER);
                 }else{
                     mListener.event(CURRENT_STAGE, MyConfig.WRONG_ANSWER);

@@ -6,6 +6,35 @@
     android:layout_height="match_parent"
     android:background="@drawable/init_backscreen"
     tools:context=".InitActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        >
+        <ImageView
+            android:id="@+id/helpBtn_init"
+            android:src="@drawable/help"
+            android:maxHeight="50dp"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="도움" />
+
+    </RelativeLayout>
+    <Chronometer
+        android:id="@+id/stopwatch_init"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:textSize="30dp"
+        android:background="@drawable/clock_border"
+        android:layout_margin="10dp"
+        />
     <LinearLayout
         android:id="@+id/initBookBtnContainer"
         android:layout_width="wrap_content"
