@@ -270,31 +270,31 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         switch (MyConfig.CurrentStage){
 
             case 1:
-                builder.setMessage(R.string.project2Hint);
+                builder.setMessage(R.string.step1hint);
                 break;
             case 2:
-                builder.setMessage(Hint.hint2);
+                builder.setMessage(R.string.step2hint);
                 break;
             case 3:
-                builder.setMessage(Hint.hint3);
+                builder.setMessage(R.string.step3hint);
                 break;
             case 4:
-                builder.setMessage(Hint.hint4);
+                builder.setMessage(R.string.step4hint);
                 break;
             case 5:
-                builder.setMessage(Hint.hint5);
+                builder.setMessage(R.string.step5hint);
                 break;
             case 6:
-                builder.setMessage(Hint.hint6);
+                builder.setMessage(R.string.step6hint);
                 break;
             case 7:
-                builder.setMessage(Hint.hint7);
+                builder.setMessage(R.string.step7hint);
                 break;
             case 8:
-                builder.setMessage(Hint.hint8);
+                builder.setMessage(R.string.step8hint);
                 break;
             case 9:
-                builder.setMessage(Hint.hint9);
+                builder.setMessage(R.string.step9hint);
                 break;
         }
 

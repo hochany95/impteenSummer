@@ -42,7 +42,7 @@ public class InitActivity extends AppCompatActivity {
         }else{
             vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         }
-        player = MediaPlayer.create(this, R.raw.suzume_instrumental);
+        player = MediaPlayer.create(this, R.raw.suzume_piano);
         player.setLooping(true);
 
         if(!MyConfig.GAME_START){

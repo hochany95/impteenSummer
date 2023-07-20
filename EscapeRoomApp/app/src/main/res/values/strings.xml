@@ -12,84 +12,61 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="rules">
-        "
-        1. 휴대폰은 조장이 관리한다
-        2. 앱이 커지지 않도록 조심하자
-        3. 배경음악 소리를 끄지 말자
-        4. 다른 사람의 짐을 뒤지지 말자
-        5. 기물을 파손하지 말자
-        * 같이 협력하여 게임에서 승리하자 *
-        "
+"1. 휴대폰은 조장이 관리한다
+2. 앱이 커지지 않도록 조심하자
+3. 배경음악 소리를 끄지 말자
+4. 다른 사람의 짐을 뒤지지 말자
+5. 기물을 파손하지 말자
+* 같이 협력하여 게임에서 승리하자 *"
     </string>
     <string name="hintWarning">
-        "
-        힌트 사용시 10분의 시간이 추가됩니다.
-        다음 힌트는 10분 뒤 사용 가능합니다.
-        힌트를 사용하시겠습니까?
-        "
+"힌트 사용시 10분의 시간이 추가됩니다.
+다음 힌트는 10분 뒤 사용 가능합니다.
+힌트를 사용하시겠습니까?"
     </string>
-    <string name="project1Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step1hint">
+"시계나 숫자가 아닌 전체 그림을 한 번에 보자
+5개의 o에 각각 들어갈 글자가 무엇일까?
+답은 영어일까"
     </string>
-    <string name="project2Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step2hint">
+"1070을 주목하고
+모든 것은 운에 맡겨보자"
     </string>
-    <string name="project3Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step3hint">
+"나는 누구냐고?
+나는 시간이다"
     </string>
-    <string name="project4Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step4hint">
+"카드에도 짝은 있다"
     </string>
-    <string name="project5Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step5hint">
+"정말로 쉬자
+음료도 같이 나눠마시자"
     </string>
-    <string name="project6Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step6hint">
+"어릴적 비밀일기 많이 썼는데..
+요즘도 쓰나?"
     </string>
-    <string name="project7int">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step7hint">
+"많이 듣던 찬양이 낯설다
+가사를 못외워서 그런가?"
     </string>
-    <string name="project8Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step8hint">
+"수고한 교사들을 다시
+존경하는 마음으로 다시보자"
     </string>
-    <string name="project9Hint">
-        "
-        시계나 숫자가 아닌 전체 그림을 한 번에 보자
-        5개의 o에 각각 들어갈 글자가 무엇일까?
-        답은 영어이다";
-        "
+    <string name="step9hint">
+"복도에 돌아다니는 악한 세력은
+전신갑주를 입은 우리를 이길 수 없다
+한 목소리라면 더 큰 힘을 내겠지"
+    </string>
+    <string name="lastMessage">
+"정말로 수고 했어
+한 팀으로 지혜를 모와
+결국 이겨냈구나
+이제 강당에 모여
+마무리 하자"
     </string>
 
 
