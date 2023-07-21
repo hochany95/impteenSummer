@@ -114,6 +114,7 @@ public class InitActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
                 MyConfig.CurrentStage = MissionFragment01.CURRENT_STAGE;
                 startActivity(intent);
+                overridePendingTransition(R.anim.none, R.anim.horizon_exit);
             }
         });
     }
@@ -168,6 +169,7 @@ public class InitActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
                     MyConfig.CurrentStage =  MissionFragment01.CURRENT_STAGE;
                     startActivity(intent);
+                    overridePendingTransition(R.anim.none, R.anim.horizon_exit);
                     initDialog.dismiss();
                 }
                 // test를 위한 암호 - 제거 필요
