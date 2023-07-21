@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -98,13 +99,33 @@ public class InitActivity extends AppCompatActivity {
         });
         binding.initBookBtn.setOnLongClickListener(view -> {
             if(!MyConfig.isTestMode()){
-                MyConfig.setTestMode(true);
-                binding.testModeBtn.setVisibility(View.VISIBLE);
-                Toast.makeText(getApplicationContext(), "테스트 모드 진입", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder testDialogBuilder = new AlertDialog.Builder(this)
+                        .setTitle("테스트 모드 진입하시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                MyConfig.setTestMode(true);
+                                binding.testModeBtn.setVisibility(View.VISIBLE);
+                                Toast.makeText(getApplicationContext(), "테스트 모드 진입", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("취소", null);
+                testDialogBuilder.show();
+
             }else{
-                MyConfig.setTestMode(false);
-                binding.testModeBtn.setVisibility(View.INVISIBLE);
-                Toast.makeText(getApplicationContext(), "테스트 모드 해제", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder testDialogBuilder = new AlertDialog.Builder(this)
+                        .setTitle("일반 모드로 진입하시겠습니까?")
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                MyConfig.setTestMode(false);
+                                binding.testModeBtn.setVisibility(View.INVISIBLE);
+                                Toast.makeText(getApplicationContext(), "테스트 모드 해제", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton("취소", null);
+                testDialogBuilder.show();
+
             }
             return true;
         });
@@ -158,25 +179,22 @@ public class InitActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogLayout);
 
-        dialogAnswerBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                String inputString = inputEditText.getText().toString();
-                inputEditText.setText("");
-                if(inputString.equalsIgnoreCase("three")
-                        ||inputString.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-                    MyConfig.CurrentStage =  MissionFragment01.CURRENT_STAGE;
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.none, R.anim.horizon_exit);
-                    initDialog.dismiss();
-                }
-                // test를 위한 암호 - 제거 필요
-               else{
-                   vibrator.vibrate(500);
-                    Toast.makeText(getApplicationContext(), "우리 다시 생각해볼까요?", Toast.LENGTH_SHORT).show();
-                }
+        dialogAnswerBtn.setOnClickListener(view -> {
+            String inputString = inputEditText.getText().toString();
+            inputEditText.setText("");
+            if(inputString.equalsIgnoreCase("three")
+                    ||inputString.equalsIgnoreCase(MyConfig.TEST_ANSWER)){
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+                MyConfig.CurrentStage =  MissionFragment01.CURRENT_STAGE;
+                startActivity(intent);
+                overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+                initDialog.dismiss();
+            }
+            // test를 위한 암호 - 제거 필요
+           else{
+               vibrator.vibrate(500);
+                Toast.makeText(getApplicationContext(), "우리 다시 생각해볼까요?", Toast.LENGTH_SHORT).show();
             }
         });
         initDialog = builder.create();
