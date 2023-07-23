@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -14,12 +13,14 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Vibrator;
 import android.os.VibratorManager;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import com.impacteen.hochan.escaperoomapp.conf.Hint;
+import com.impacteen.hochan.escaperoomapp.conf.HintManager;
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
+import com.impacteen.hochan.escaperoomapp.conf.PrefManager;
 import com.impacteen.hochan.escaperoomapp.control.AnswerEventListener;
 import com.impacteen.hochan.escaperoomapp.databinding.ActivityMainBinding;
 
@@ -29,7 +30,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity implements AnswerEventListener {
 
     public Map<Integer, Fragment> fragmentMap = new LinkedHashMap<>();
-    public Map<Integer, Boolean> isOpen = new LinkedHashMap<>();
     public MissionFragment01 missionFragment01;
     public MissionFragment02 missionFragment02;
     public MissionFragment03 missionFragment03;
@@ -50,16 +50,13 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("testApp", "onCreate");
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         initFragment();
 
-        binding.stopwatchMain.setBase(MyConfig.START_TIME);
-        if(!MyConfig.GAME_FINISH){
-            binding.stopwatchMain.start();
-        }
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
             VibratorManager vibManager = (VibratorManager) getSystemService(VIBRATOR_MANAGER_SERVICE);
@@ -68,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         }
         inputManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-
-        player = MediaPlayer.create(this, R.raw.yiruma_indigo);
-        player.setLooping(true);
 
         binding.prevBtn.setOnClickListener(view -> movePrevFragment());
 
@@ -81,24 +75,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
         }else{
             binding.nextBtn.setVisibility(View.GONE);
         }
-        binding.helpBtn.setOnLongClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-            builder.setTitle("init");
-            builder.setMessage("셋팅을 초기화 하시겠습니까?");
-            builder.setPositiveButton("확인", (dialog, which) -> {
-                Toast.makeText(getApplicationContext(), "모든 값을 초기화 합니다.", Toast.LENGTH_LONG).show();
-                initFragment();
-                MyConfig.START_TIME = 0l;
-                MyConfig.LAST_HINT_USED = 0l;
-                MyConfig.TEST_MODE = false;
-                MyConfig.CurrentStage = 0;
-                Hint.init();
-                finish();
-            });
-            builder.setNegativeButton("취소", null);
-            builder.show();
-            return true;
-        });
+
 
         binding.nextBtn.setOnClickListener(view -> {
             if(MyConfig.CurrentStage == MyConfig.LAST_STAGE){
@@ -111,29 +88,66 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
 
     @Override
     protected void onResume() {
+        Log.d("testApp", "onResume");
+
+        if(PrefManager.getGameState(getApplication()) != PrefManager.GAME_INIT){
+            MyConfig.START_TIME = PrefManager.getTime(getApplication());
+            binding.stopwatchMain.setBase(MyConfig.START_TIME);
+        }
+
+        if(PrefManager.getGameState(getApplication())!=PrefManager.GAME_FINISHED){
+
+            binding.stopwatchMain.start();
+        }
+
+        player = MediaPlayer.create(this, R.raw.yiruma_indigo);
+        player.setLooping(true);
+
         player.start();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        player.pause();
+        Log.d("testApp", "onPause");
+        if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
+            PrefManager.setTime(getApplication(), MyConfig.START_TIME);
+        }
+        try{
+            player.pause();
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(), "앱이 비정상 종료되었습니다.\n앱을 다시 시작해주세요 \n:" + e, Toast.LENGTH_SHORT).show();
+        }
+
+        if(PrefManager.getNeedHintInit(getApplication())){
+            HintManager.init();
+            PrefManager.setNeedHintInit(getApplication(), false);
+        }
+
         super.onPause();
     }
 
     @Override
     protected void onUserLeaveHint() {
+        Log.d("testApp", "onUserLeaveHint");
+        if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
+            PrefManager.setTime(getApplication(), MyConfig.START_TIME);
+        }
         player.stop();
         player.release();
+        PrefManager.setNeedHintInit(getApplication(), true);
         super.onUserLeaveHint();
     }
 
     @Override
     protected void onDestroy() {
+        Log.d("testApp", "onDestroy");
         player.stop();
         player.release();
         super.onDestroy();
     }
+
+
     @Override
     public void onBackPressed() {
         if (MyConfig.CurrentStage == MissionFragment01.CURRENT_STAGE) {
@@ -235,6 +249,15 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
             case MyConfig.GAME_CLEAR:
                 MoveLastActivity();
                 break;
+
+            case MyConfig.MUSIC_CHANGE:
+                player.stop();
+                player.release();
+
+                player = MediaPlayer.create(this, idx);
+                player.setLooping(true);
+                player.start();
+
             default:
                 Toast.makeText(getApplicationContext(), "get unexpected message from"+idx, Toast.LENGTH_SHORT).show();
                 break;
@@ -245,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
                 .setTitle("힌트를 보시겠습니까?")
                 .setMessage(R.string.hintWarning)
                 .setPositiveButton("힌트사용", (dialogInterface, i) -> {
-                    if(MyConfig.LAST_HINT_USED < 1 || MyConfig.TEST_MODE || Hint.opened.get(MyConfig.CurrentStage) ||
+                    if(MyConfig.LAST_HINT_USED < 1 || MyConfig.TEST_MODE || HintManager.opened.get(MyConfig.CurrentStage) ||
                             SystemClock.elapsedRealtime() - MyConfig.LAST_HINT_USED > MyConfig.COOL_TIME){
                         showHintDialog();
                     }
@@ -260,8 +283,8 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
 
     }
     private void showHintDialog(){
-        if(!Hint.opened.get(MyConfig.CurrentStage)){
-            Hint.opened.set(MyConfig.CurrentStage, true);
+        if(!HintManager.opened.get(MyConfig.CurrentStage)){
+            HintManager.opened.set(MyConfig.CurrentStage, true);
             MyConfig.START_TIME -= MyConfig.PENALTY_TIME;
             binding.stopwatchMain.setBase(MyConfig.START_TIME);
         }

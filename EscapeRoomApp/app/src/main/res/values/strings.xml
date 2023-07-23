@@ -11,14 +11,7 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="rules">
-"1. 휴대폰은 조장이 관리한다
-2. 앱이 커지지 않도록 조심하자
-3. 배경음악 소리를 끄지 말자
-4. 다른 사람의 짐을 뒤지지 말자
-5. 기물을 파손하지 말자
-* 같이 협력하여 게임에서 승리하자 *"
-    </string>
+
     <string name="hintWarning">
 "힌트 사용시 10분의 시간이 추가됩니다.
 다음 힌트는 10분 뒤 사용 가능합니다.

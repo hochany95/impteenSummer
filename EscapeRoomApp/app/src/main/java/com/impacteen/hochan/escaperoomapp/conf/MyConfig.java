@@ -8,7 +8,9 @@ public class MyConfig {
     public static final int GO_NEXT = 2;
     public static final int PAUSE_MUSIC = 3;
     public static final int RESUME_MUSIC = 4;
-    public static final int GAME_CLEAR = 5;
+    public static final int MUSIC_CHANGE = 5;
+    public static final int GAME_CLEAR = 6;
+
     public static final int LAST_STAGE =9;
     public static final long COOL_TIME = 600000;
     public static final long PENALTY_TIME = 600000;
@@ -30,4 +32,6 @@ public class MyConfig {
 
     public static boolean GAME_START = false;
     public static boolean GAME_FINISH = false;
+
+    public static int INIT_COUNT = 0;
 }

@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\USER\.android\avd\Pixel_4_API_31.avd" />
+            <value value="C:\Users\48372\.android\avd\flutter_device.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-07-13T00:05:03.548271600Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-07-21T17:25:50.563154Z" />
   </component>
 </project>
