@@ -54,6 +54,17 @@ public class MissionFragment04 extends Fragment {
                 return true;
             }
         });
+
+        binding.imageView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.step4CardImage.getVisibility() == View.INVISIBLE){
+                    binding.step4CardImage.setVisibility(View.VISIBLE);
+                }else{
+                    binding.step4CardImage.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
         return binding.getRoot();
     }
 

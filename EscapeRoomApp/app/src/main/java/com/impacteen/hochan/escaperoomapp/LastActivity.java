@@ -39,6 +39,6 @@ public class LastActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(getApplicationContext(), "게임이 끝났습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "게임이 끝났습니다. \n 안내에 따라 강당으로 이동 바랍니다.", Toast.LENGTH_SHORT).show();
     }
 }

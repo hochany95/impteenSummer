@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.EscapeRoomApp.FullscreenContainer"
-    tools:context=".MissionFragment01">
+>
 
     <TextView
         android:id="@+id/currentStateScript4"
@@ -60,5 +60,22 @@
             android:imeActionLabel="정답"
             android:textSize="20dp" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        >
+        <ImageView
+            android:id="@+id/step4_card_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            android:src="@drawable/card_app_displayed_verti"/>
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
