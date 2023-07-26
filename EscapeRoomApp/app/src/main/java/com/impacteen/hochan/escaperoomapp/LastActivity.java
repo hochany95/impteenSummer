@@ -18,23 +18,26 @@ public class LastActivity extends AppCompatActivity {
 
         binding = ActivityLastBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        PrefManager.setGameFinished(getApplication());
+
 
         if(PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED){
             //정상 과정으로 마지막 단계 도착
             binding.stopwatchLast.setBase(MyConfig.START_TIME);
             PrefManager.setTime(getApplication(), MyConfig.START_TIME);
+            PrefManager.setGameFinished(getApplication());
         }else{
             // 비정상 앱 종료
             binding.stopwatchLast.setBase(PrefManager.getTime(getApplication()));
         }
 
-
-
         MyConfig.GAME_FINISH = true;
+    }
 
-
-
+    @Override
+    protected void onPause() {
+        PrefManager.setGameFinished(getApplication());
+        PrefManager.setTime(getApplication(), MyConfig.START_TIME);
+        super.onPause();
     }
 
     @Override

@@ -257,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements AnswerEventListen
                 player = MediaPlayer.create(this, idx);
                 player.setLooping(true);
                 player.start();
-
+                break;
             default:
                 Toast.makeText(getApplicationContext(), "get unexpected message from"+idx, Toast.LENGTH_SHORT).show();
                 break;

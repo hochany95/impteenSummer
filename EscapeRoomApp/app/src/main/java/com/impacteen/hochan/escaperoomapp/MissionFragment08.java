@@ -24,7 +24,7 @@ public class MissionFragment08 extends Fragment {
 
     private Context mContext;
     private AnswerEventListener mListener;
-    private String ANSWER = "1234";
+    private String ANSWER = "0613";
     public MissionFragment08() {
     }
 

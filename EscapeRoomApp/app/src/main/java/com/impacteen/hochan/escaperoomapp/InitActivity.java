@@ -20,12 +20,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.impacteen.hochan.escaperoomapp.conf.HintManager;
 import com.impacteen.hochan.escaperoomapp.conf.MyConfig;
 import com.impacteen.hochan.escaperoomapp.conf.PrefManager;
 import com.impacteen.hochan.escaperoomapp.databinding.ActivityInitBinding;
+
+import org.w3c.dom.Text;
+
 public class InitActivity extends AppCompatActivity {
     public AlertDialog initDialog;
     public ActivityInitBinding binding;
@@ -53,15 +57,11 @@ public class InitActivity extends AppCompatActivity {
         createPasswordDialog();
 
         //=====================================================
-        //초기 룰 설명
+        //초기 룰 설명하는 화면
         if(PrefManager.getGameState(this) == PrefManager.GAME_INIT){
             binding.ruleScreen.setVisibility(View.VISIBLE);
             binding.ruleStartBtn.setVisibility(View.VISIBLE);
             binding.initRuleBackground.setVisibility(View.VISIBLE);
-        }else{
-            binding.ruleScreen.setVisibility(View.INVISIBLE);
-            binding.ruleStartBtn.setVisibility(View.INVISIBLE);
-            binding.initRuleBackground.setVisibility(View.INVISIBLE);
         }
 
         //시작버튼과 함께 게임 시작
@@ -89,10 +89,7 @@ public class InitActivity extends AppCompatActivity {
         });
         binding.helpBtnInit.setOnLongClickListener(view -> {
             if(MyConfig.INIT_COUNT >=2){
-                initAllSetting();
-                player.stop();
-                player.release();
-                Toast.makeText(getApplicationContext(), "설정을 초기화 합니다. 앱을 다시 실행해주세요", Toast.LENGTH_SHORT).show();
+                showResetDialog();
 
             }else{
                 MyConfig.INIT_COUNT++;
@@ -157,7 +154,6 @@ public class InitActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
         player.stop();
         player.release();
         super.onDestroy();
@@ -165,9 +161,7 @@ public class InitActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Log.d("testApp", "onResume");
-
-
+        controlOnResume();
         player = MediaPlayer.create(this, R.raw.suzume_piano);
         player.setLooping(true);
         player.start();
@@ -176,59 +170,34 @@ public class InitActivity extends AppCompatActivity {
         } else{
             binding.testModeBtn.setVisibility(View.INVISIBLE);
         }
-
-        //시작전 종료시
-        if(PrefManager.getGameState(getApplication()) == PrefManager.GAME_INIT){
-            HintManager.init();
-        }
-        // 비정상 종료시
-        if(PrefManager.getGameState(getApplication()) != PrefManager.GAME_INIT){
-            MyConfig.START_TIME = PrefManager.getTime(getApplication());
-            binding.stopwatchInit.setBase(MyConfig.START_TIME);
-            MyConfig.GAME_START = true;
-        }
-        if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
-            binding.stopwatchInit.start();
-        }
-
-        //이미 게임이 끝나고 앱이 종료
-        if (PrefManager.getGameState(this) == PrefManager.GAME_FINISHED) {
-            MyConfig.GAME_FINISH = true;
-            Intent intent = new Intent(getApplicationContext(), LastActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-            startActivity(intent);
-        }
         super.onResume();
     }
+
     @Override
     protected void onPause() {
-        Log.d("testApp", "onPause");
         if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
             PrefManager.setTime(getApplication(), MyConfig.START_TIME);
         }
         try{
             player.pause();
         }catch (Exception e){
-            Toast.makeText(getApplicationContext(), "앱이 비정상 종료되었습니다.\n앱을 다시 시작해주세요 \n:" + e, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "앱이 비정상 종료되었습니다.\n앱을 다시 시작해주세요", Toast.LENGTH_SHORT).show();
         }
         if(PrefManager.getNeedHintInit(getApplication())){
             HintManager.init();
             PrefManager.setNeedHintInit(getApplication(), false);
         }
-
         super.onPause();
     }
 
     @Override
     protected void onUserLeaveHint() {
-        Log.d("testApp", "onUserLeaveHint");
         if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
             PrefManager.setTime(getApplication(), MyConfig.START_TIME);
         }
         player.stop();
         player.release();
         PrefManager.setNeedHintInit(getApplication(), true);
-
         super.onUserLeaveHint();
     }
 
@@ -263,7 +232,6 @@ public class InitActivity extends AppCompatActivity {
     }
 
 
-
     private void showPasswordDialog(){
         initDialog.show();
     }
@@ -272,7 +240,6 @@ public class InitActivity extends AppCompatActivity {
     public void onBackPressed() {
         Toast.makeText(getApplicationContext(), "앱이 꺼지지 않도록 주의 하자", Toast.LENGTH_SHORT).show();
     }
-
 
 
     private void showWarningDialog(){
@@ -293,8 +260,6 @@ public class InitActivity extends AppCompatActivity {
                 })
                 .create();
         dialog.show();
-
-
     }
     private void showHintDialog(){
         if(!HintManager.opened.get(0)){
@@ -302,8 +267,6 @@ public class InitActivity extends AppCompatActivity {
             MyConfig.START_TIME -= MyConfig.PENALTY_TIME;
             binding.stopwatchInit.setBase(MyConfig.START_TIME);
         }
-
-
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("힌트입니다")
                 .setMessage(R.string.step1hint)
@@ -315,6 +278,7 @@ public class InitActivity extends AppCompatActivity {
         MyConfig.INIT_COUNT = 0;
         PrefManager.resetTime(getApplication());
         PrefManager.setGameReset(getApplication());
+        PrefManager.clear(getApplication());
         MyConfig.START_TIME = SystemClock.elapsedRealtime();
         MyConfig.GAME_START = false;
         MyConfig.GAME_FINISH = false;
@@ -323,6 +287,63 @@ public class InitActivity extends AppCompatActivity {
 
         PrefManager.setTime(getApplicationContext(), MyConfig.START_TIME);
         binding.stopwatchInit.setBase(MyConfig.START_TIME);
+
+    }
+
+    private void controlOnResume() {
+        if(PrefManager.getGameState(getApplication()) == PrefManager.GAME_INIT){
+            HintManager.init();
+            return;
+        }
+        // 비정상 종료시-진행 중 혹은 종료 시
+        if(PrefManager.getGameState(getApplication()) != PrefManager.GAME_INIT){
+            MyConfig.START_TIME = PrefManager.getTime(getApplication());
+            binding.stopwatchInit.setBase(MyConfig.START_TIME);
+            MyConfig.GAME_START = true;
+        }
+        if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_STARTED) {
+            binding.stopwatchInit.start();
+        }
+
+        //이미 게임이 끝나고 앱이 종료
+        if (PrefManager.getGameState(getApplication()) == PrefManager.GAME_FINISHED) {
+            MyConfig.GAME_FINISH = true;
+            Intent intent = new Intent(getApplicationContext(), LastActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_USER_ACTION);
+            startActivity(intent);
+        }
+    }
+
+    private void showResetDialog() {
+        MyConfig.INIT_COUNT = 0;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout dialogLayout = (LinearLayout) inflater.inflate(R.layout.init_password_dialog, null);
+        EditText inputEditText = (EditText) dialogLayout.findViewById(R.id.inputBox);
+        ImageView dialogAnswerBtn = (ImageView) dialogLayout.findViewById(R.id.dialogAnswerBtn);
+        TextView dialogTextView = (TextView) dialogLayout.findViewById(R.id.dialogTextView);
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogLayout);
+        dialogTextView.setText("초기화를 위한 비밀번호 입력");
+        dialogAnswerBtn.setOnClickListener(view -> {
+            String inputString = inputEditText.getText().toString();
+            inputEditText.setText("");
+            if(inputString.equalsIgnoreCase(MyConfig.RESET_COMMAND)){
+                initAllSetting();
+                player.stop();
+                player.release();
+                Toast.makeText(getApplicationContext(), "설정을 초기화 합니다. 앱을 다시 실행해주세요", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            // test를 위한 암호 - 제거 필요
+            else{
+                vibrator.vibrate(1000);
+                Toast.makeText(getApplicationContext(), "잘못된 접근", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog resetDialog = builder.create();
+        resetDialog.show();
 
     }
 

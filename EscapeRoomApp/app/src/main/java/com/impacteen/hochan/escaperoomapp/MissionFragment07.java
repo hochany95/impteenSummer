@@ -27,7 +27,7 @@ public class MissionFragment07 extends Fragment {
     public MediaPlayer player;
     private Context mContext;
     private AnswerEventListener mListener;
-    private String ANSWER = "1234";
+    private String ANSWER = "짝사랑";
 
     public MissionFragment07() {
     }
@@ -69,6 +69,7 @@ public class MissionFragment07 extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // 음악 문제 시작
         player = MediaPlayer.create(mContext, R.raw.love_never_fails_pitch_shift);
         player.setLooping(true);
         player.start();
@@ -79,8 +80,9 @@ public class MissionFragment07 extends Fragment {
         super.onPause();
         player.stop();
         player.release();
+        //음악 마지막 변경
         if(BGMPaused){
-            mListener.event(CURRENT_STAGE, MyConfig.RESUME_MUSIC);
+            mListener.event(R.raw.reminiscent, MyConfig.MUSIC_CHANGE);
         }
     }
 

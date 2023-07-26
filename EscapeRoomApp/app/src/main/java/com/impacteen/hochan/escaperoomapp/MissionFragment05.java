@@ -80,8 +80,9 @@ public class MissionFragment05 extends Fragment {
 
     @Override
     public void onPause() {
+        //다시 음악 시작 - 2번재 음악으로 변경
         if(BGMPaused){
-            mListener.event(CURRENT_STAGE, MyConfig.RESUME_MUSIC);
+            mListener.event(R.raw.flower, MyConfig.MUSIC_CHANGE);
         }
 
         super.onPause();

@@ -15,7 +15,7 @@ public class MyConfig {
     public static final long COOL_TIME = 600000;
     public static final long PENALTY_TIME = 600000;
     public static final String TEST_ANSWER = "1234";
-
+    public static final String RESET_COMMAND = "reset1234";
     public static boolean TEST_MODE = false;
     public static boolean isTestMode() {
         return TEST_MODE;
@@ -34,4 +34,6 @@ public class MyConfig {
     public static boolean GAME_FINISH = false;
 
     public static int INIT_COUNT = 0;
+
+
 }
